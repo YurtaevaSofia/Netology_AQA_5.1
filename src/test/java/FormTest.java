@@ -74,6 +74,10 @@ public class FormTest {
 
         $(withText("Необходимо подтверждение")).waitUntil(Condition.visible, 15000);
 
+        $$("button").find(exactText("Перепланировать")).click();
+
+        $(withText("Успешно!")).waitUntil(Condition.visible, 15000);
+
     }
 
 
