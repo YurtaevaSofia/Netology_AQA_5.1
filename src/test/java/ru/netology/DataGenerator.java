@@ -16,11 +16,13 @@ public class DataGenerator {
 
     public static class Registration {
 
-        private Registration() {}
+        private Registration() {
 
-        public static LocalDate getDate (){
-            LocalDate dateMeetingForTest = LocalDate.now().plusDays(3);
-            return  dateMeetingForTest;
+        }
+
+        public static String getDate(int daysToAdd) {
+            LocalDate dateMeetingForTest = LocalDate.now().plusDays(daysToAdd);
+            return dateMeetingForTest.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         }
 
         public static String getCity (){
@@ -30,15 +32,11 @@ public class DataGenerator {
         }
 
         public static RegistrationByInfo generateByInfo(String locale) {
-            Faker faker = new Faker(new Locale("ru"));
-            return new RegistrationByInfo(
-                    faker.name().fullName(), faker.phoneNumber(), getCity(), getDate());
+            Faker faker = new Faker(new Locale(locale));
+            return new RegistrationByInfo(faker.name().lastName() + " " + faker.name().firstName(),
+                    faker.phoneNumber().phoneNumber(), getCity());
         }
-
-        public static LocalDate changeDate (RegistrationByInfo person){
-            person.getDate().plusDays(3);
-            return person.getDate();
-        }
-    }}
+    }
+}
 
 
